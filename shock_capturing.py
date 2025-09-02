@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
+P_e = 0.93  # Exit pressure
 def initialize_grid(x_min=0, x_max=3, n_points=61):
     """Initialize the spatial grid and area distribution"""
     x = np.linspace(x_min, x_max, n_points)
@@ -132,7 +132,7 @@ def maccormack_step(U1, U2, U3, A, dx, dt, gamma, Cx, P_e):
     return U1, U2, U3
 
 
-def simulate_nozzle_flow(nt=1600, CFL=0.5, gamma=1.4, Cx=0.2, P_e=0.6784):
+def simulate_nozzle_flow(nt=1600, CFL=0.5, gamma=1.4, Cx=0.2, P_e=P_e):
     """Main function to run the nozzle flow simulation"""
     # Initialize grid and area distribution
     x, dx, A = initialize_grid()
@@ -260,27 +260,27 @@ def plot_results(x, A, rho, V, T, P, M, m_dot):
     plt.show()
 
 
-def main():
+def run(P_e=P_e):
     """Run the simulation and plot results"""
     # Run simulation
-    x, A, rho, V, T, P, M, m_dot, U1, U2, U3, dt = simulate_nozzle_flow()
+    x, A, rho, V, T, P, M, m_dot, U1, U2, U3, dt = simulate_nozzle_flow(P_e=P_e)
     
     # Print some results
-    print("Area:", A)
-    print("Density:", rho)
-    print("Velocity:", V)
-    print("Temperature:", T)
-    print("Pressure:", P)
-    print("Mach number:", M)
-    print("Mass flow rate:", m_dot)
-    print("U1:", U1)
-    print("U2:", U2)
-    print("U3:", U3)
-    print("Final time step:", dt)
+    # print("Area:", A)
+    # print("Density:", rho)
+    # print("Velocity:", V)
+    # print("Temperature:", T)
+    # print("Pressure:", P)
+    # print("Mach number:", M)
+    # print("Mass flow rate:", m_dot)
+    # print("U1:", U1)
+    # print("U2:", U2)
+    # print("U3:", U3)
+    # print("Final time step:", dt)
     
     # Plot results
     plot_results(x, A, rho, V, T, P, M, m_dot)
 
 
 if __name__ == "__main__":
-    main()
+    run()

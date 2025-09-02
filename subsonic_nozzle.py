@@ -96,7 +96,7 @@ def calculate_secondary_variables(rho, V, T, A):
     M = V / np.sqrt(T)
     return P, m_dot, M
 
-def main():
+def run(P_e=P_EXIT):
     # Grid generation and initialization
     grid_size = 31
     grid, rho, V, T, A, P, m_dot, M = initialize_arrays(grid_size)
@@ -125,7 +125,7 @@ def main():
         
         # Apply boundary conditions
         rho, V, T, rho_bar, V_bar, T_bar = apply_boundary_conditions(
-            rho, V, T, rho_bar, V_bar, T_bar, P_EXIT)
+            rho, V, T, rho_bar, V_bar, T_bar, P_e)
         
         # Update interior points
         for i in range(1, grid_size-1):
@@ -171,4 +171,5 @@ def main():
     plt.show()
 
 if __name__ == "__main__":
-    main()
+    run()
+    
